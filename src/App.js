@@ -22,12 +22,14 @@ import {
   ColorMapping,
   Editor,
 } from "./pages";
-
+import { BrowserRouter } from 'react-router-dom';
 import "./App.css";
+import { useStateContext } from "./contexts/ContextProvider";
 
 function App() {
-  const activeMenu = true;
+  const {activeMenu}= useStateContext();
   return (
+    <BrowserRouter>
     <div className="flex relative dark:bg-main-dark-bg">
       <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
         <TooltipComponent content="Settings" position="top">
@@ -64,7 +66,7 @@ function App() {
       >
         <div
           // navbar class has been defined in app.css
-          className="fixed md:static bg-main-bg dark:bg-main-dark-bg w-full navbar"
+          className="fixed md:static dark:bg-main-dark-bg bg-main-bg  w-full navbar"
         >
          < Navbar />
         </div>
@@ -85,6 +87,7 @@ function App() {
           <Route path="/calendar" element={<Calendar/>} />
           <Route path="/kanban" element={<Kanban/>} />
           <Route path="/editor" element={<Editor/>} />
+          <Route path="/calendar" element={<Calendar/>} />
           <Route path="/color-mapping" element={<ColorMapping/>} />
           <Route path="/color-picker" element={<ColorPicker/>} />
 
@@ -101,6 +104,7 @@ function App() {
         </Routes>
       </div>
     </div>
+    </BrowserRouter>
   );
 }
 
